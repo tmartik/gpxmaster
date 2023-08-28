@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/Style.qml</file>
+		<file>qml/DataSource.qml</file>
+        <file>qml/DialogLoader.qml</file>
+        <file>qml/MainViewModel.qml</file>
+		
+        <file>qml/menu/AppMenu.qml</file>
+        <file>qml/menu/MapContextMenu.qml</file>
+        <file>qml/menu/SegmentContextMenu.qml</file>
+
+        <file>qml/view/DocumentsView.qml</file>
+        <file>qml/view/MapView.qml</file>
+        <file>qml/view/LayerMapItemView.qml</file>
+        <file>qml/view/PlaceLayerMapItemView.qml</file>
+		<file>qml/view/SimpleTreeView.qml</file>
+        <file>qml/view/TreeViewDelegate.qml</file>
+		<file>qml/view/ActionBar.qml</file>
+        <file>qml/view/ToolActionBar.qml</file>
+		
+        <file>qml/dialog/MapManagementDialog.qml</file>
+        <file>qml/dialog/MapSelectionDialog.qml</file>
+        <file>qml/dialog/MapAddDialog.qml</file>
+        <file>qml/dialog/WptEditDialog.qml</file>
+        <file>qml/dialog/TextQueryDialog.qml</file>
+        
+    </qresource>
+</RCC>

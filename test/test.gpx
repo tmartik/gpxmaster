@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<gpx>
+    <trk>
+        <name>Test Track</name>
+        <trkseg>
+            <trkpt lat="65.35872418042673" lon="23.956088867192364"/>
+            <trkpt lat="63.397566761313136" lon="20.660190429670052"/>
+            <trkpt lat="61.727511778195684" lon="19.704379882828306"/>
+        </trkseg>
+        <trkseg>
+            <trkpt lat="59.807423221821104" lon="21.879672851596922"/>
+            <trkpt lat="60.13728529263299" lon="27.328891601598258"/>
+        </trkseg>
+    </trk>
+    <wpt lat="61.02226487725402" lon="18.726596679696854">
+        <name>Test Waypoint</name>
+        <cmt>Test Comment.</cmt>
+    </wpt>
+</gpx>
