@@ -6,7 +6,7 @@
 
 
 KmlParser::KmlParser(const QString& input, QObject *parent)
-    : QObject{parent}, mXml(input)
+    : FileParserBase(parent), mXml(input)
 {
     QJsonArray trksJson;
     mJson.insert("tracks", trksJson);

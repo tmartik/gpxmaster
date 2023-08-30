@@ -1,10 +1,12 @@
 #ifndef KMLPARSER_H
 #define KMLPARSER_H
 
+#include "fileparserbase.h"
+
 #include <QXmlStreamReader>
 #include <QJsonObject>
 
-class KmlParser : public QObject
+class KmlParser : public FileParserBase
 {
     Q_OBJECT
 public:

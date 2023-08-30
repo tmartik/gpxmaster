@@ -1,13 +1,15 @@
 #ifndef GPXPARSER_H
 #define GPXPARSER_H
 
+#include "fileparserbase.h"
+
 #include <QXmlStreamReader>
 #include <QJsonObject>
 
 /*
  * This class reads in a GPX-formatted string and returns the contents as a stringified JSON object.
  */
-class GpxParser : public QObject
+class GpxParser : public FileParserBase
 {
     Q_OBJECT
 public:
