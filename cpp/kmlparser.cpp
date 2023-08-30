@@ -70,6 +70,15 @@ void KmlParser::parsePlacemark() {
             }
         }
         if(mMode == ParsingPlacemark && mXml.isStartElement()) {
+            if(mXml.name() == "description") {
+                // Waypoint name
+                QString wptDescription = mXml.readElementText();
+                qDebug() << "DESCRIPTION:" << wptDescription;
+
+                wptJson.insert("cmt", wptDescription);
+            }
+        }
+        if(mMode == ParsingPlacemark && mXml.isStartElement()) {
             if(mXml.name() == "coordinates") {
                 // Waypoint coordinates
                 QString coordinateString = mXml.readElementText();

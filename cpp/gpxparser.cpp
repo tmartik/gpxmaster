@@ -19,7 +19,6 @@ void GpxParser::parse()
     QList<QJsonObject> trkSeg;          // A segment: Contains multiple points
     QList<QJsonArray> trk;              // A track: Contains multiple segmets
     QString trkName;
-    QString wptName;
 
     while(!mXml.atEnd()) {
         mXml.readNext();
@@ -51,7 +50,7 @@ void GpxParser::parse()
         if(mMode == ParsingWpt && mXml.isStartElement()) {
             if(mXml.name() == "name") {
                 // Waypoint name
-                wptName = mXml.readElementText();
+                QString wptName = mXml.readElementText();
                 qDebug() << "WPT NAME:" << wptName;
 
                 QJsonArray wptsJson = mJson.value("waypoints").toArray();
@@ -59,6 +58,19 @@ void GpxParser::parse()
                 wptsJson.removeLast();
 
                 wptJson.insert("name", wptName);
+                wptsJson.append(wptJson);
+                mJson.insert("waypoints", wptsJson);
+            }
+            if(mXml.name() == "cmt") {
+                // Waypoint comment
+                QString wptCmt = mXml.readElementText();
+                qDebug() << "WPT CMT:" << wptCmt;
+
+                QJsonArray wptsJson = mJson.value("waypoints").toArray();
+                QJsonObject wptJson = wptsJson.last().toObject();
+                wptsJson.removeLast();
+
+                wptJson.insert("cmt", wptCmt);
                 wptsJson.append(wptJson);
                 mJson.insert("waypoints", wptsJson);
             }
