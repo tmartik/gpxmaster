@@ -7,7 +7,7 @@ import QtQuick.Shapes 1.15
 MapItemView {
     id: root
 
-    property Style style
+    property var style
     property real margin: style.margin
 
     signal clicked(var index, var data)
