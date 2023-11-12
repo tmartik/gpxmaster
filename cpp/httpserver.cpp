@@ -44,6 +44,8 @@ void HttpServer::readClient()
                 const int x = tile[1].toInt();
                 const int y = tile[2].toInt();
 
+                const bool zoomLevelAllowed = mZoomMin <= z && z <= mZoomMax;
+
                 // Make sure the corresponding folder exists on the local filesystem
                 const QString localTilePath = QString("%1/%2/%3/%4/%5").arg(mCachePath).arg(mMapName).arg(z).arg(x).arg(y);
                 QFile tileFile(localTilePath);
@@ -62,7 +64,7 @@ void HttpServer::readClient()
                     } else {
                         qDebug() << localTilePath << "FAILED!";
                     }
-                } else if(!mFlightMode) {
+                } else if(!mFlightMode && zoomLevelAllowed) {
                     // Online mode; request the tile from the server
                     QString baseurl(mURL);
                     baseurl = baseurl.replace("%Z", QString::number(z));
@@ -122,6 +124,12 @@ void HttpServer::setURL(QString url, QString name, QString referer)
     mURL = url;
     mMapName = name;
     mReferer = referer;
+}
+
+void HttpServer::setZoomLevels(int minZoom, int maxZoom)
+{
+    mZoomMax = maxZoom;
+    mZoomMin = minZoom;
 }
 
 void HttpServer::setMapName(QString name)

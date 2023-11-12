@@ -137,8 +137,7 @@ ApplicationWindow {
         if(mainViewModel.mapProviders.length > 0) {
             Qt.callLater(function() {
                 mapLoader.sourceComponent = mapViewComponent
-                HttpServer.setURL(mainViewModel.mapProviders[0].url, mainViewModel.mapProviders[0].cacheName, mainViewModel.mapProviders[0].referer)
-                mapView.clearData()
+                selectMap(0)
             })
         }
     }
@@ -425,7 +424,7 @@ ApplicationWindow {
         id: mapAddDialogComponent
         MapAddDialog {
             onAccepted: {
-                mainViewModel.addMapProvider(mapName, mapUrl, cacheName, referer)
+                mainViewModel.addMapProvider(mapName, mapUrl, cacheName, referer, zoomLevels)
                 dialogLoader.close()            // TODO: is this really needed ?
 
                 selectMap(mainViewModel.mapProviders.length - 1)
@@ -457,6 +456,8 @@ ApplicationWindow {
         var m = mainViewModel.mapProviders[index]
         HttpServer.setURL(m.url, m.cacheName, m.referer)
         mapView.clearData()
+        var zoomLevelParts = (m.zoomLevels || "4-17").split('-')
+        HttpServer.setZoomLevels(zoomLevelParts[0], zoomLevelParts[1])
 
         mapLoader.sourceComponent = mapViewComponent
 

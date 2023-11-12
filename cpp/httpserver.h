@@ -19,6 +19,7 @@ public slots:   // exposed to QML
     int getPortNumber();
     void setCacheFolder(QString cacheFolder);
     void setURL(QString url, QString cacheFolder, QString referer);
+    void setZoomLevels(int minZoom, int maxZoom);
     void setFlightMode(bool enabled);
 
 signals:
@@ -52,6 +53,8 @@ private:
     QString mMapName;
     QString mUserAgent;
     QString mReferer;
+    int mZoomMax;
+    int mZoomMin;
 
     QString mCachePath;
 

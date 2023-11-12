@@ -10,6 +10,8 @@ Dialog {
 
     property string referer
 
+    property string zoomLevels
+
     visible: false
     title: qsTr("Add a map server")
     standardButtons: StandardButton.Save | StandardButton.Cancel
@@ -44,6 +46,13 @@ Dialog {
         TextField  {
             Layout.fillWidth: true
             onTextChanged: referer = text
+        }
+        Text {
+            text: qsTr("Zoom levels (e.g. 10-15):")
+        }
+        TextField  {
+            Layout.fillWidth: true
+            onTextChanged: zoomLevels = text
         }
     }
 }
