@@ -13,11 +13,12 @@ Item {
     property int routeFilterMinDistance: 10
     property bool useImperialUnits: false
 
-    function addMapProvider(mapName, mapUrl, cacheName) {
+    function addMapProvider(mapName, mapUrl, cacheName, referer) {
         mapProviders.push({
                       name: mapName,
                       url: mapUrl,
-                      cacheName: cacheName
+                      cacheName: cacheName,
+                      referer: referer
                   })
         mapProvidersChanged()
     }

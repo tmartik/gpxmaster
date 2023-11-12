@@ -8,6 +8,8 @@ Dialog {
     property string mapUrl
     property string cacheName
 
+    property string referer
+
     visible: false
     title: qsTr("Add a map server")
     standardButtons: StandardButton.Save | StandardButton.Cancel
@@ -35,6 +37,13 @@ Dialog {
         TextField  {
             Layout.fillWidth: true
             onTextChanged: cacheName = text
+        }
+        Text {
+            text: qsTr("Referer Header:")
+        }
+        TextField  {
+            Layout.fillWidth: true
+            onTextChanged: referer = text
         }
     }
 }

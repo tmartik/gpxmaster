@@ -137,7 +137,7 @@ ApplicationWindow {
         if(mainViewModel.mapProviders.length > 0) {
             Qt.callLater(function() {
                 mapLoader.sourceComponent = mapViewComponent
-                HttpServer.setURL(mainViewModel.mapProviders[0].url, mainViewModel.mapProviders[0].cacheName)
+                HttpServer.setURL(mainViewModel.mapProviders[0].url, mainViewModel.mapProviders[0].cacheName, mainViewModel.mapProviders[0].referer)
                 mapView.clearData()
             })
         }
@@ -425,7 +425,7 @@ ApplicationWindow {
         id: mapAddDialogComponent
         MapAddDialog {
             onAccepted: {
-                mainViewModel.addMapProvider(mapName, mapUrl, cacheName)
+                mainViewModel.addMapProvider(mapName, mapUrl, cacheName, referer)
                 dialogLoader.close()            // TODO: is this really needed ?
 
                 selectMap(mainViewModel.mapProviders.length - 1)
@@ -455,7 +455,7 @@ ApplicationWindow {
         mapLoader.sourceComponent = null
 
         var m = mainViewModel.mapProviders[index]
-        HttpServer.setURL(m.url, m.cacheName)
+        HttpServer.setURL(m.url, m.cacheName, m.referer)
         mapView.clearData()
 
         mapLoader.sourceComponent = mapViewComponent

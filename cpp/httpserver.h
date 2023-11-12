@@ -18,7 +18,7 @@ public:
 public slots:   // exposed to QML
     int getPortNumber();
     void setCacheFolder(QString cacheFolder);
-    void setURL(QString url, QString cacheFolder);
+    void setURL(QString url, QString cacheFolder, QString referer);
     void setFlightMode(bool enabled);
 
 signals:
@@ -51,6 +51,7 @@ private:
     QString mURL;
     QString mMapName;
     QString mUserAgent;
+    QString mReferer;
 
     QString mCachePath;
 

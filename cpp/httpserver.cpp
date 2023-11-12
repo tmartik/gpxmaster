@@ -71,6 +71,11 @@ void HttpServer::readClient()
                     QUrl url = QUrl(baseurl);
 
                     QNetworkRequest request(url);
+
+                    if(mReferer.length() > 0) {
+                        request.setRawHeader("Referer", mReferer.toLatin1());
+                    }
+                    request.setRawHeader("Host", url.host().toLatin1());
                     QObject* metadata = new QObject(this);  // 'this' will delete it eventually.
                     metadata->setProperty("localUrl", path);
                     request.setOriginatingObject(metadata);
@@ -110,12 +115,13 @@ void HttpServer::setCacheFolder(QString cacheFolder)
     mCachePath = cacheFolder;
 }
 
-void HttpServer::setURL(QString url, QString name)
+void HttpServer::setURL(QString url, QString name, QString referer)
 {
     emit cancel();
 
     mURL = url;
     mMapName = name;
+    mReferer = referer;
 }
 
 void HttpServer::setMapName(QString name)
