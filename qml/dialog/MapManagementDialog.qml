@@ -7,11 +7,16 @@ import QtQuick.Controls 1.4
  * Dialog for editing map providers.
  */
 Dialog {
-    property alias model: listView.model
+    id: dialog
+    property var model: []
+    property var selectedMapProvider
+
+    signal save(var index, var mapProvider)
+    signal remove(var index)
 
     visible: false
     title: qsTr("Map Management")
-    standardButtons: /*StandardButton.Save |*/ StandardButton.Cancel
+    standardButtons: Dialog.Close
 
     RowLayout {
         anchors.fill: parent
@@ -24,12 +29,14 @@ Dialog {
             Layout.alignment: Qt.AlignTop
             width: 200
             highlight: highlightComponent
+            model: dialog.model.length
             delegate: Item {
+                property var mapProvider: dialog.model[modelData]
                 width: listView.width
                 height: 24
                 Text {
                     anchors.fill: parent
-                    text: modelData.name
+                    text: mapProvider.name
                     verticalAlignment: Qt.AlignVCenter
                 }
                 MouseArea {
@@ -37,36 +44,29 @@ Dialog {
                     onClicked: listView.currentIndex = index
                 }
             }
-
-
+            onCurrentIndexChanged: selectedMapProvider = JSON.parse(JSON.stringify(dialog.model[currentIndex]))
         }
 
         // Map provider settings
         ColumnLayout {
             Layout.alignment: Qt.AlignTop
-            Text {
-                text: qsTr("Service name:")
+            MapProviderView {
+                id: mapProviderView
+                mapProvider: selectedMapProvider
             }
-            TextField {
-                Layout.fillWidth: true
-                text: model[listView.currentIndex].name
-                //onTextChanged: mapName = text
-            }
-            Text {
-                text: qsTr("Tile Map Service URL (e.g. http://localhost/%Z/%X/%Y):")
-            }
-            TextField  {
-                Layout.fillWidth: true
-                text: model[listView.currentIndex].url
-                //onTextChanged: mapUrl = text
-            }
-            Text {
-                text: qsTr("Relative cache folder name:")
-            }
-            TextField  {
-                Layout.fillWidth: true
-                text: model[listView.currentIndex].cacheName
-                //onTextChanged: cacheName = text
+            RowLayout {
+                Button {
+                    text: qsTr("Delete")
+                    onClicked: remove(listView.currentIndex)
+                }
+                Button {
+                    text: qsTr("Revert")
+                    onClicked: selectedMapProvider = JSON.parse(JSON.stringify(dialog.model[currentIndex]))
+                }
+                Button {
+                    text: qsTr("Save")
+                    onClicked: save(listView.currentIndex, mapProviderView.mapProvider)
+                }
             }
         }
     }

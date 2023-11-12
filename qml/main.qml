@@ -423,8 +423,9 @@ ApplicationWindow {
     Component {
         id: mapAddDialogComponent
         MapAddDialog {
+            mapProvider: {}
             onAccepted: {
-                mainViewModel.addMapProvider(mapName, mapUrl, cacheName, referer, zoomLevels)
+                mainViewModel.addMapProvider(mapProvider)
                 dialogLoader.close()            // TODO: is this really needed ?
 
                 selectMap(mainViewModel.mapProviders.length - 1)
@@ -474,6 +475,9 @@ ApplicationWindow {
         id: mapManagementDialogComponent
         MapManagementDialog {
             model: mainViewModel.mapProviders
+            onSave: mainViewModel.updateMapProvider(index, mapProvider)
+            onRemove: mainViewModel.deleteMapProvider(index)
+            onAccepted: selectMap(selectedIndex)
         }
     }
 

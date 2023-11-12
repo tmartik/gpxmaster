@@ -24,6 +24,6 @@
         <file>qml/dialog/MapAddDialog.qml</file>
         <file>qml/dialog/WptEditDialog.qml</file>
         <file>qml/dialog/TextQueryDialog.qml</file>
-        
+        <file>qml/dialog/MapProviderView.qml</file>
     </qresource>
 </RCC>
