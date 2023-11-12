@@ -46,7 +46,7 @@ Item {
                 TextField  {
                     id: nameEdit
                     Layout.fillWidth: true
-                    text: mapProvider[modelData.prop] || ""
+                    text: (mapProvider || {})[modelData.prop] || ""
                     onTextChanged: mapProvider[modelData.prop] = text
                 }
             }

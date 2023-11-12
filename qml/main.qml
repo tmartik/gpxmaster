@@ -423,7 +423,7 @@ ApplicationWindow {
     Component {
         id: mapAddDialogComponent
         MapAddDialog {
-            mapProvider: {}
+            mapProvider: ({})
             onAccepted: {
                 mainViewModel.addMapProvider(mapProvider)
                 dialogLoader.close()            // TODO: is this really needed ?
